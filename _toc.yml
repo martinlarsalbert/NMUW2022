@@ -1,0 +1,11 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+chapters:
+- file: 05.01_model_tests
+- file: 02.01_VMMs
+- file: 03.01_inverse_dynamics
+- file: 06.01_EKS
+- file: 07.01_results
