@@ -11,14 +11,13 @@
 # %load imports.py
 get_ipython().run_line_magic('load_ext', 'autoreload')
 get_ipython().run_line_magic('autoreload', '2')
-get_ipython().run_line_magic('reload_kedro', '')
+
 get_ipython().run_line_magic('config', 'Completer.use_jedi = False  ## (To fix autocomplete)')
 
 import pandas as pd
 from src.models.vmm import ModelSimulator
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.rcParams["figure.figsize"] = (10,10)
 plt.style.use('presentation')
 from src.visualization.plot import track_plots, plot, captive_plot
 import kedro
@@ -143,45 +142,49 @@ eq_f
 # In[10]:
 
 
+get_ipython().run_line_magic('reload_kedro', '')
 vmm_name = 'vmm_martins_simple'
-ek = catalog.load(f"{ vmm_name }.ek")
 model = catalog.load(f"{ vmm_name}.motion_regression.joined.model")
 vmm = catalog.load(f"{ vmm_name }")
-ek.parameters = model.parameters
-added_masses = catalog.load("added_masses")
+initial_parameters = catalog.load("initial_parameters")
+model.parameters=initial_parameters
+
+id = 22773
+ship_data = catalog.load("ship_data")
+data = catalog.load(f"{ id }.data_ek_smooth")
 
 
 # In[11]:
 
 
-t = np.arange(0, 70, 0.01)
-input_columns = ['delta','U','thrust']
-state_columns = ['x0', 'y0', 'psi', 'u', 'v', 'r']
-data = pd.DataFrame(index=t, columns=state_columns + input_columns)
-data['u'] = 2
-data['delta'] = np.deg2rad(15)
-data['thrust'] = 30
-data.fillna(0, inplace=True)
-data['U'] = np.sqrt(data['u']**2 + data['v']**2)
-
+#t = np.arange(0, 70, 0.01)
+#input_columns = ['delta','U','thrust']
+#state_columns = ['x0', 'y0', 'psi', 'u', 'v', 'r']
+#data = pd.DataFrame(index=t, columns=state_columns + input_columns)
+#data['u'] = 2
+#data['delta'] = np.deg2rad(-35)
+#data['thrust'] = 30
+#data.fillna(0, inplace=True)
+#data['U'] = np.sqrt(data['u']**2 + data['v']**2)
+#
 
 result = model.simulate(df_=data)
 
-dataframes = {'simulation': result.result}
+dataframes = {'simulation': result.result,
+             'model test' : data}
+styles = {}
+styles['model test'] = {'style':'k-', 'alpha':1, 'lw':1.5}
+styles['simulation'] = {'style':'r-', 'alpha':1, 'lw':1.5}
+
 #dataframes['simulate'] = ek.simulate(data=data, input_columns=input_columns, solver='Radau')
-track_plots(dataframes, lpp=model.ship_parameters['L'], beam=model.ship_parameters['B'], N=15, 
-            styles={'simulation':{'alpha':1}});
+
+fig,ax=plt.subplots()
+fig.set_size_inches(matplotlib.rcParams["figure.figsize"][0]*0.4, matplotlib.rcParams["figure.figsize"][1])
+
+track_plots(dataframes, lpp=model.ship_parameters['L'], beam=model.ship_parameters['B'], N=7, 
+            styles=styles, ax=ax);
+
+
+
 result.result.to_csv('example.csv')
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 

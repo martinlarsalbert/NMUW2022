@@ -34,9 +34,7 @@ import os.path
 import anyconfig
 
 import matplotlib
-matplotlib.rcParams["figure.figsize"] = (7,4)
 plt.style.use('presentation')
-
 
 from myst_nb import glue
 from src.symbols import *

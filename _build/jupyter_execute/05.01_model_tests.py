@@ -24,9 +24,7 @@ import os.path
 import anyconfig
 
 import matplotlib
-matplotlib.rcParams["figure.figsize"] = (7,4)
 plt.style.use('presentation')
-
 
 from myst_nb import glue
 from src.symbols import *
@@ -144,6 +142,36 @@ for test_type, df_ in df_runs.groupby(by=['test_type']):
     ax = fig.axes
     ax.set_title(f"{test_type}")
     ax.get_legend().set_visible(False)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

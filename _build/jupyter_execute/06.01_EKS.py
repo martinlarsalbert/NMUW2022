@@ -16,7 +16,7 @@ import pandas as pd
 from src.models.vmm import ModelSimulator
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.rcParams["figure.figsize"] = (5,5)
+#matplotlib.rcParams["figure.figsize"] = (5,5)
 plt.style.use('presentation')
 from src.visualization.plot import track_plots, plot, captive_plot
 import kedro
@@ -74,22 +74,17 @@ for vmm_name in vmm_names:
     vmms[vmm_name] = catalog.load(vmm_name)
 
 
-# In[20]:
+# In[2]:
 
 
 id = 22774
 data = catalog.load(f"{ id }.data")
 data_ek_smooth = catalog.load(f"{ id }.data_ek_smooth")
 data_ek_filter = catalog.load(f"{ id }.data_ek_filter")
-
-
-# In[25]:
-
-
 data['r1d'] = np.gradient(data['r'], data.index)
 
 
-# In[38]:
+# In[3]:
 
 
 dataframes = {
@@ -98,10 +93,16 @@ dataframes = {
     'EKS' : data_ek_smooth,
     
 }
-fig = plot(dataframes, keys=['psi','r','r1d'], ncols=3, fig_size=(9,4));
+fig = plot(dataframes, keys=['psi','r','r1d'], ncols=3, fig_size=matplotlib.rcParams["figure.figsize"]);
 fig.axes[0].set_ylabel(r'$\psi$')
 fig.axes[2].set_ylabel(r'$\dot{r}$')
 fig.axes[2].set_xlabel('time');
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

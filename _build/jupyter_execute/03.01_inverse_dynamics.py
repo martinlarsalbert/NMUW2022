@@ -9,15 +9,14 @@
 # %load imports.py
 get_ipython().run_line_magic('load_ext', 'autoreload')
 get_ipython().run_line_magic('autoreload', '2')
-get_ipython().run_line_magic('reload_kedro', '')
 get_ipython().run_line_magic('config', 'Completer.use_jedi = False  ## (To fix autocomplete)')
 
 import pandas as pd
 from src.models.vmm import ModelSimulator
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.rcParams["figure.figsize"] = (7,4)
 plt.style.use('presentation')
+matplotlib.rcParams["xtick.labelsize"] = 16
 from src.visualization.plot import track_plots, plot, captive_plot
 import kedro
 import numpy as np
@@ -80,11 +79,14 @@ for vmm_name in vmm_names:
 # In[2]:
 
 
+get_ipython().run_line_magic('reload_kedro', '')
 vmm_name = 'vmm_martins_simple'
 vmm = vmms[vmm_name]
 data = pd.read_csv('example.csv', index_col=0)
 added_masses = catalog.load("added_masses")
 model = catalog.load(f"{ vmm_name}.motion_regression.joined.model")
+initial_parameters = catalog.load("initial_parameters")
+model.parameters=initial_parameters
 
 regression = MotionRegression(
         vmm=vmm,
@@ -240,4 +242,40 @@ ax=axes[2]
 df_parameters_N.plot.bar(ax=ax)
 plt.tight_layout()
 ax.get_legend().set_visible(False)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 

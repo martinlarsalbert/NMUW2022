@@ -17,7 +17,7 @@ pd.options.display.max_rows = 100
 from src.models.vmm import ModelSimulator
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.rcParams["figure.figsize"] = (10,10)
+#matplotlib.rcParams["figure.figsize"] = (10,10)
 plt.style.use('presentation')
 from src.visualization.plot import track_plots, plot, captive_plot
 import kedro
@@ -66,16 +66,19 @@ global_variables = anyconfig.load(globals_path)
 
 
 vmm_names = global_variables["vmms"]
+vmm_names.remove('vmm_linear')
+
 only_joined = global_variables[
     "only_joined"
 ]  # (regress/predict with only models from joined runs)S
 
 vmms = {}
 for vmm_name in vmm_names:
+    
     vmms[vmm_name] = catalog.load(vmm_name)
 
 
-# In[42]:
+# In[18]:
 
 
 id = 22774
@@ -91,16 +94,16 @@ for vmm_name in vmm_names:
     
     #index = np.argmax(data_resimulate.isnull().any(axis=1))
     if data_resimulate.notnull().all(axis=1).all():
-        dataframes[vmm_name] = data_resimulate.copy()
+        dataframes[vmm_name] = data_resimulate.iloc[0:-7500].copy()
     
     styles[vmm_name] = {'alpha':0.75}
 
 
-dataframes['model test'] = data.iloc[0:-8000]
-styles['model test'] = {'style':'k-', 'alpha':1, 'lw':3}
+dataframes['model test'] = data.iloc[0:-7500]
+styles['model test'] = {'style':'k-', 'alpha':1, 'lw':1}
 
 
-# In[45]:
+# In[19]:
 
 
 fig = track_plots(dataframes, lpp=ship_data['L'], beam=ship_data['B'], plot_boats=True, styles=styles, N=7);

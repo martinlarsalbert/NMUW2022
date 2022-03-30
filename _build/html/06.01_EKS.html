@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -92,7 +93,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="index.html">
-   Parameter identification of Vessel Manoeuvring Models
+   System Identification of Ship Dynamics
   </a>
  </li>
 </ul>
@@ -120,6 +121,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="07.01_results.html">
    Results
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01_monte_carlo.html">
+   Monte-carlo simulations
   </a>
  </li>
 </ul>
@@ -179,11 +185,11 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/martinlarsalbert/wPCC_pipeline"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F06.01_EKS.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/martinlarsalbert/wPCC_pipeline/issues/new?title=Issue%20on%20page%20%2F06.01_EKS.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -204,7 +210,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/06.01_EKS.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/martinlarsalbert/wPCC_pipeline/master?urlpath=tree/docs/06.01_EKS.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -241,16 +247,9 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="extended-kalman-smoother">
 <h1>Extended Kalman Smoother<a class="headerlink" href="#extended-kalman-smoother" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;r1d&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell tag_remove_input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/06.01_EKS_4_0.png" src="_images/06.01_EKS_4_0.png" />
+<img alt="_images/06.01_EKS_3_0.png" src="_images/06.01_EKS_3_0.png" />
 </div>
 </div>
 </div>

@@ -16,7 +16,7 @@ import pandas as pd
 from src.models.vmm import ModelSimulator
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.rcParams["figure.figsize"] = (10,10)
+#matplotlib.rcParams["figure.figsize"] = (10,10)
 plt.style.use('presentation')
 from src.visualization.plot import track_plots, plot, captive_plot
 import kedro
@@ -78,10 +78,10 @@ for vmm_name in vmm_names:
     
 
 
-# In[7]:
+# In[6]:
 
 
-id = 22774
+id = 22773
 
 ship_data = catalog.load("ship_data")
 data = catalog.load(f"{ id }.data_ek_smooth")
@@ -96,21 +96,28 @@ for vmm_name in vmm_names:
     
     df_ = catalog.load(f"{ vmm_name }.motion_regression.joined.{ id }.data_resimulate")
     
-    dataframes[vmm_name] = df_.iloc[0:-8000].copy()
-    styles[vmm_name] = {'alpha':0.75}
+    #dataframes[vmm_name] = df_.iloc[0:-8000].copy()
+    dataframes[vmm_name] = df_.copy()
+    styles[vmm_name] = {'alpha':1}
 
 
-dataframes['model test'] = data.iloc[0:-8000]
-styles['model test'] = {'style':'k-', 'alpha':1, 'lw':3}
+#dataframes['model test'] = data.iloc[0:-8000]
+dataframes['model test'] = data
+styles['model test'] = {'style':'k-', 'alpha':1, 'lw':1}
 
 
-# In[8]:
+# In[23]:
 
 
-track_plots(dataframes, lpp=ship_data['L'], beam=ship_data['B'], plot_boats=True, styles=styles, N=7);
+fig,ax=plt.subplots()
+
+fig.set_size_inches(matplotlib.rcParams["figure.figsize"][0]*0.4, matplotlib.rcParams["figure.figsize"][1])
+
+track_plots(dataframes, lpp=ship_data['L'], beam=ship_data['B'], plot_boats=True, styles=styles, N=7, ax=ax, flip=False);
+ax.legend(loc='lower left');
 
 
-# In[6]:
+# In[5]:
 
 
 number_of_parameters = pd.Series(dtype=float)
@@ -118,6 +125,8 @@ for vmm_name, parameters in derivatives.items():
     number_of_parameters[vmm_name] = len(parameters)
     
 fig,ax=plt.subplots()
+ax.tick_params(labelsize=15)
+
 fig.set_size_inches(7,3)
 number_of_parameters.sort_values().plot.bar(ax=ax);
 
